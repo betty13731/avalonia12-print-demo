@@ -1,0 +1,39 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="720" d:DesignHeight="420"
+        x:Class="AvaloniaNativePrintDemo.Views.MainWindow"
+        Title="Avalonia 12 Native Print Demo"
+        Width="720" Height="420">
+
+  <Grid RowDefinitions="Auto,Auto,Auto,Auto,*,Auto" Margin="16" RowSpacing="10">
+    <TextBlock Grid.Row="0" FontSize="20" FontWeight="SemiBold" Text="Avalonia 12 Native Print Demo"/>
+
+    <TextBlock Grid.Row="1" Text="PDF файл"/>
+    <Grid Grid.Row="2" ColumnDefinitions="*,Auto" ColumnSpacing="8">
+      <TextBox Grid.Column="0" Text="{Binding FilePath}" Watermark="/home/user/doc.pdf или C:\temp\doc.pdf" />
+      <Button Grid.Column="1" Content="Выбрать..." Command="{Binding PickFileCommand}"/>
+    </Grid>
+
+    <TextBlock Grid.Row="3" Text="Принтер"/>
+    <Grid Grid.Row="4" RowDefinitions="Auto,Auto" RowSpacing="8">
+      <ComboBox Grid.Row="0" ItemsSource="{Binding Printers}" SelectedItem="{Binding SelectedPrinter}">
+        <ComboBox.ItemTemplate>
+          <DataTemplate>
+            <TextBlock Text="{Binding Name}" />
+          </DataTemplate>
+        </ComboBox.ItemTemplate>
+      </ComboBox>
+
+      <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="8">
+        <Button Content="Обновить принтеры" Command="{Binding RefreshPrintersCommand}"/>
+        <Button Content="Печать" Command="{Binding PrintCommand}"/>
+      </StackPanel>
+    </Grid>
+
+    <Border Grid.Row="5" Background="#11227A" CornerRadius="6" Padding="10">
+      <TextBlock Text="{Binding Status}" TextWrapping="Wrap"/>
+    </Border>
+  </Grid>
+</Window>
